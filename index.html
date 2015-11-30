@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!--Import Google Icon Font-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="velocity.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="vendors/velocity.min.js"></script>
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="vendors/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+    <div id="instruction">
+        <p id="instruction-1">先试试快速点几下空白处</p>
+        <p id="instruction-2">生日快乐！再试试点击礼物</p>
+    </div>
     <div id="images">
         <div class="row">
             <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
@@ -36,10 +39,11 @@
     </div>
     <!-- Hiding library elements in the DOM is fun -->
     <aside id="library">
-        <img src="images/nightsky.png" id="nightsky" />
         <img src="images/big-glow.png" id="big-glow" />
         <img src="images/small-glow.png" id="small-glow" />
     </aside>
-    <script src="main.js"></script>
+    <script src="js/requestanimframe.js"></script>
+    <script src="js/fireworks.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

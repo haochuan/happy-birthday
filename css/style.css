@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+}
+
+#library {
+    display: none;
+}
+
+#instruction {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#instruction-1 {
+    color: #5AFBE7;
+    font-size: 36px;
+}
+
+#instruction-2 {
+    display: none;
+    color: #5AFBE7;
+    font-size: 36px;
+}
+
+canvas {
+    position: absolute;
+    top: 0px;
+    z-index: -99;
+
+}
