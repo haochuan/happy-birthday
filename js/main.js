@@ -3,11 +3,103 @@ var App = App || {};
 // track how many images left on the screen
 App.remainImageCount = 0;
 App.clickCount = 0;
+App.currentNote = 0;
+App.audioContext = null;
+App.oscNode = null;
+
+App.score = [
+    {
+        freq: 130.81,
+        duration: 300
+    },
+    {
+        freq: 146.83,
+        duration: 300
+    },
+    {
+        freq: 130.81,
+        duration: 300
+    },
+    {
+        freq: 174.61,
+        duration: 300
+    },
+    {
+        freq: 164.81,
+        duration: 600
+    },
+
+    {
+        freq: 130.81,
+        duration: 300
+    },
+    {
+        freq: 146.83,
+        duration: 300
+    },
+    {
+        freq: 130.81,
+        duration: 300
+    },
+    {
+        freq: 196.00,
+        duration: 300
+    },
+    {
+        freq: 174.61,
+        duration: 600
+    },
+
+    {
+        freq: 130.81,
+        duration: 300
+    },
+    {
+        freq: 261.63,
+        duration: 300
+    },
+    {
+        freq: 220.00,
+        duration: 300
+    },
+    {
+        freq: 174.61,
+        duration: 300
+    },
+    {
+        freq: 146.83,
+        duration: 600
+    },
+
+    {
+        freq: 233.08,
+        duration: 300
+    },
+    {
+        freq: 220.00,
+        duration: 300
+    },
+    {
+        freq: 174.61,
+        duration: 300
+    },
+    {
+        freq: 196.00,
+        duration: 300
+    },
+    {
+        freq: 174.61,
+        duration: 600
+    },
+
+];
 
 $(document).ready(function() {
+    initWebAudio();
     $('body').height(window.innerHeight);
     // image click handler
     $('.image').click(function(e) {
+        playNote();
         imageOut($(this).attr('id'));
     });
     // track click count
@@ -16,22 +108,61 @@ $(document).ready(function() {
         changeInstruction();
 
     });
-    $('#instruction-1').addClass('animated rubberBand');
+    $('#instruction-text').addClass('animated rubberBand');
 });
+
+function initWebAudio() {
+    try {
+        // Fix up for prefixing
+        window.AudioContext = window.AudioContext||window.webkitAudioContext;
+        App.audioContext = new AudioContext();
+    } catch(e) {
+        alert('Web Audio API is not supported in this browser');
+    }
+}
+
+function playNote() {
+    App.oscNode = App.audioContext.createOscillator();
+    App.gainNode = App.audioContext.createGain();
+    App.gainNode.gain.value = 0.8;
+    App.oscNode.type = 'sine'; // sine, square, sawtooth, triangle
+
+    // Note that the belows are in the type of AudioParam
+    App.oscNode.frequency.value = App.score[App.currentNote].freq;
+    App.oscNode.connect(App.gainNode);
+    App.gainNode.connect(App.audioContext.destination);
+    // App.oscNode.detune.value = note.detune;
+    var currentTime = App.audioContext.currentTime;
+    App.oscNode.start(currentTime);
+    setTimeout(function() {
+        App.gainNode.gain.value = 0;
+        App.currentNote = (App.currentNote + 1) % 20;
+    }, App.score[App.currentNote].duration);
+}
 
 /**
  * Change instruction based on the click number
  */
 function changeInstruction() {
     if (App.clickCount === 10) {
-        $('#instruction-1').addClass('animated hinge')
-        $('#instruction-2').show();
-        $('#instruction-2').addClass('animated bounceInDown');
+        $('#instruction-text').addClass('animated hinge')
+        setTimeout(function() {
+            $('#instruction-text').text('再试试点击出来的礼物');
+            $('#instruction-text').removeClass();
+            $('#instruction-text').addClass('animated bounceInDown')
+        }, 200);
+
         loadImages(5);
     } 
 
     if (App.clickCount === 15) {
-        $('#instruction-2').addClass('animated rollOut');
+        $('#instruction-text').addClass('animated rollOut');
+        setTimeout(function() {
+            $('#instruction-text').text('生日快乐！');
+            $('#instruction-text').removeClass();
+            $('#instruction-text').addClass('animated bounceInDown')
+        }, 200);
+
     }
 }
 

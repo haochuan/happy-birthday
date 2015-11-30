@@ -11,16 +11,11 @@ body {
     text-align: center;
 }
 
-#instruction-1 {
+#instruction-text {
     color: #5AFBE7;
     font-size: 36px;
 }
 
-#instruction-2 {
-    display: none;
-    color: #5AFBE7;
-    font-size: 36px;
-}
 
 canvas {
     position: absolute;
