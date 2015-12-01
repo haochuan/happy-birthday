@@ -108,6 +108,15 @@ $(document).ready(function() {
         changeInstruction();
 
     });
+
+    $('body')[0].addEventListener('touchstart', function(e) {
+        // e.preventDefault();
+        if (e.target.tagName === 'BODY') {
+            App.clickCount++;
+            changeInstruction();
+        }
+    }, false);
+
     $('#instruction-text').addClass('animated rubberBand');
 });
 
