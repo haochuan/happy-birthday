@@ -109,7 +109,7 @@ $(document).ready(function() {
 
     });
 
-    $('body')[0].addEventListener('touchstart', function(e) {
+    $('body')[0].addEventListener('touchend', function(e) {
         // e.preventDefault();
         if (e.target.tagName === 'BODY') {
             App.clickCount++;
@@ -167,7 +167,7 @@ function changeInstruction() {
     if (App.clickCount === 15) {
         $('#instruction-text').addClass('animated rollOut');
         setTimeout(function() {
-            $('#instruction-text').text('生日快乐！');
+            $('#instruction-text').text('生日快乐！Happy Birthday!');
             $('#instruction-text').removeClass();
             $('#instruction-text').addClass('animated bounceInDown')
         }, 200);

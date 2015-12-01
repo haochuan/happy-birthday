@@ -68,7 +68,9 @@ var Fireworks = (function() {
    * new firework on touch / click
    */
   function createFirework() {
-    createParticle();
+    if (App.clickCount < 10 || Math.floor((Math.random() * 10) > 7)) {
+      createParticle();   
+    }
   }
 
   /**
